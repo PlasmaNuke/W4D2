@@ -12,7 +12,7 @@ class Manager < Employee
         return sum if manager.subordinates.none? { |employee| employee.is_a?(Manager) }
 
         manager.subordinates.each do |subord|
-             subord.is_a?(Manager) ? sum += Manager.sum_all_sub_salaries(subord) : sum += subord.salary
+            subord.is_a?(Manager) ? sum += Manager.sum_all_sub_salaries(subord) : sum += subord.salary
         end
         sum
     end
