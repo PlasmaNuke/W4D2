@@ -1,5 +1,6 @@
 require_relative "null_piece"
 require_relative "piece"
+require_relative "queen"
 
 class Board
 
@@ -8,7 +9,6 @@ class Board
     def initialize
         @rows = Array.new(8) { Array.new(8) { nil }}
         # @null_piece = NullPiece.new
-        self[[0,0]] = Piece.new(:black, self, [0,0])
     end
 
     def move_piece!(start_pos, end_pos)
@@ -46,22 +46,22 @@ class Board
 
     end
 
-    # def in_check?(color)
-    #     king_pos = find_king(color)
-    #     @rows.each_with_index do |row, i|
-    #         row.each_with_index do |piece, j|
-    #             return true if piece.color != color && piece.moves.include?(king_pos)
-    #         end
-    #     end
-    #     false
-    # end
+    def in_check?(color)
+        king_pos = find_king(color)
+        @rows.each_with_index do |row, i|
+            row.each_with_index do |piece, j|
+                return true if piece.color != color && piece.moves.include?(king_pos)
+            end
+        end
+        false
+    end
 
-    # def find_king(color)
-    #     @rows.each_with_index do |row, i|
-    #         row.each_with_index do |piece, j|
-    #             return [i, j] if self[[i, j]].is_a?(King) && self[[i, j]].color == color
-    #         end
-    #     end
-    # end
+    def find_king(color)
+        @rows.each_with_index do |row, i|
+            row.each_with_index do |piece, j|
+                return [i, j] if self[[i, j]].is_a?(King) && self[[i, j]].color == color
+            end
+        end
+    end
 
 end

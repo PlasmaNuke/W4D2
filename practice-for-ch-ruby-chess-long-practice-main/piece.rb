@@ -1,4 +1,4 @@
-require_relative "board"
+require "colorize"
 
 class Piece
 
@@ -21,7 +21,8 @@ class Piece
     end
 
     def to_s
-        self.symbol.to_s
+        # self.symbol.to_s
+        " #{symbol} "
     end
 
     def move_into_check?(end_pos)
