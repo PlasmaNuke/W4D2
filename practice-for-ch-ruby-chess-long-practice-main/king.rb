@@ -10,7 +10,7 @@ class King < Piece
     ]
 
     def symbol
-        '♛'.colorize(color)
+        '♚'.colorize(color)
     end
 
     protected

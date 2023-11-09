@@ -12,7 +12,7 @@ class Piece
     end
 
     def empty?
-        return true if @board[pos] == nil
+        return true if self.is_a?(NullPiece)
         false
     end
 

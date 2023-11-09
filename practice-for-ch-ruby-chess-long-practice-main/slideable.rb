@@ -20,7 +20,6 @@ module Slideable
     end
 
     def moves
-        debugger
         move_dirs.each do |dir|
             grow_unblocked_moves_in_dir(*dir)
         end
@@ -40,16 +39,19 @@ module Slideable
         while !blocked
             new_pos = [x + dx, y + dy]
 
+            debugger
+
             break if !@board.valid_pos?(new_pos)
                 
             if @board[new_pos].empty?
                 res << new_pos
-            elsif @board[new_pos].color != @color
-                res << new_pos
+            elsif @board[new_pos].color == @color
                 blocked = true
             else
+                res << new_pos
                 blocked = true
             end
+            x, y = new_pos
         end
 
         res
