@@ -6,7 +6,8 @@ module Steppable
 
         move_diffs.each do |move_diff|
             dx, dy = move_diff
-            res << [x + dx, y + dy]
+            new_pos = [x + dx, y + dy]
+            res << new_pos if @board.valid_pos?(new_pos)
         end
         res
     end

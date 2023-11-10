@@ -1,4 +1,5 @@
 require_relative "cursor"
+require "colorize"
 
 class Display
 
@@ -10,15 +11,17 @@ class Display
     def render
         @board.rows.each_with_index do |row, i|
             row.each_with_index do |col, j|
+                color = nil
                 if @board[[i, j]].empty?
                    if (i + j).even? 
-                        print @board[[i, j]].to_s.colorize(:white)
+                        color = :white
                    else
-                        print @board[[i, j]].to_s.colorize(:black)
+                        color = :black
                    end
                 else
-                    print @board[[i, j]].to_s
+                    color = @board[[i, j]].color
                 end
+                print @board[[i, j]].to_s.colorize(color)
             end
             print "\n"
         end

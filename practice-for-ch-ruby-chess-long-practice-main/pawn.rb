@@ -40,7 +40,7 @@ class Pawn < Piece
 
         [-1, 1].each do |dx|
             new_pos = [x + dx, y + dy]
-            res << new_pos if !@board[new_pos].empty? && @board[new_pos].color != color
+            res << new_pos if @board.valid_pos?(new_pos) && !@board[new_pos].empty? && @board[new_pos].color != color
         end
 
         res
