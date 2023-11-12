@@ -6,8 +6,16 @@ module Steppable
 
         move_diffs.each do |move_diff|
             dx, dy = move_diff
+
             new_pos = [x + dx, y + dy]
-            res << new_pos if @board.valid_pos?(new_pos)
+
+            next if !@board.valid_pos?(new_pos)
+
+            piece = @board[new_pos]
+
+            is_opp = !piece.empty? && piece.color != color
+
+            res << new_pos if piece.empty? || is_opp
         end
         res
     end

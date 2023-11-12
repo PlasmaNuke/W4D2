@@ -22,7 +22,8 @@ class Pawn < Piece
                 x, y = new_pos
             end
         else
-            res << [x + dx, y] if @board.valid_pos?(new_pos) && @board[new_pos].empty?
+            new_pos = [x + dx, y]
+            res << new_pos if @board[new_pos].empty?
         end
         res + side_attacks
     end
@@ -40,11 +41,18 @@ class Pawn < Piece
     def side_attacks
         res = []
         x, y = pos
-        dy = foward_dir
+        dx = foward_dir
 
-        [-1, 1].each do |dx|
+        [-1, 1].each do |dy|
             new_pos = [x + dx, y + dy]
-            res << new_pos if @board.valid_pos?(new_pos) && (@board[new_pos].empty? || @board[new_pos].color != color)
+
+            next if !@board.valid_pos?(new_pos)
+
+            piece = @board[new_pos]
+
+            is_opp = piece.color != color && !piece.empty?
+
+            res << new_pos if is_opp
         end
 
         res

@@ -20,9 +20,11 @@ module Slideable
     end
 
     def moves
+        res = []
         move_dirs.each do |dir|
-            grow_unblocked_moves_in_dir(*dir)
+            res += grow_unblocked_moves_in_dir(*dir)
         end
+        res
     end
 
     private
@@ -38,8 +40,6 @@ module Slideable
 
         while !blocked
             new_pos = [x + dx, y + dy]
-
-            debugger
 
             break if !@board.valid_pos?(new_pos)
                 

@@ -45,6 +45,10 @@ class Cursor
     handle_key(key)
   end
 
+  def toggle_selected
+    @selected == true ? @selected = false : @selected = true
+  end
+
   private
 
   def read_char
@@ -79,6 +83,7 @@ class Cursor
   def handle_key(key)
     case key
     when :return, :space
+      toggle_selected
       @cursor_pos
     when :up, :down, :left, :right
       update_pos(MOVES[key])
@@ -91,9 +96,9 @@ class Cursor
 
   def update_pos(diff)
     dx, dy = diff
-    x, y = pos
+    x, y = cursor_pos
     new_pos = [x + dx, y + dy]
-    @pos = new_pos if @board.valid_pos?(new_pos)
+    @cursor_pos = new_pos if @board.valid_pos?(new_pos)
   end
 
 end
