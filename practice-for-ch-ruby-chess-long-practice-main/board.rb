@@ -25,12 +25,12 @@ class Board
         self[[0,4]] = Queen.new(:black, self, [0,4])
         self[[7,4]] = King.new(:white, self, [7,4])
         self[[7,3]] = Queen.new(:white, self, [7,3])
-        # (0..7).each do |y|
-        #     self[[1, y]] = Pawn.new(:black, self, [1, y])
-        # end
-        # (0..7).each do |y|
-        #     self[[6, y]] = Pawn.new(:white, self, [6, y])
-        # end
+        (0..7).each do |y|
+            self[[1, y]] = Pawn.new(:black, self, [1, y])
+        end
+        (0..7).each do |y|
+            self[[6, y]] = Pawn.new(:white, self, [6, y])
+        end
         display = Display.new(self)
         display.render
     end
